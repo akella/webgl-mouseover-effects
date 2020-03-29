@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "@johh/three-effectcomposer": "^0.0.7",
+    "dat.gui": "^0.7.6",
+    "ev-emitter": "^1.1.1",
+    "fontfaceobserver": "^2.1.0",
+    "gsap": "^3.2.1",
+    "simple-input-events": "^1.0.1",
+    "three": ">=0.102.0",
+    "three-orbit-controls": "^82.1.0"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.10",
+    "glslify-bundle": "^5.1.1",
+    "glslify-deps": "^1.3.1"
+  }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Mouse Effects with Three.js | Codrops</title>
+	<meta name="description" content="Demo for various image unrolling effects with Three.js-" />
+	<meta name="keywords" content="three.js, webgl, unroll, image, effect, rollout, website, web development" />
+	<meta name="author" content="Codrops" />
+	<link rel="stylesheet" href="https://use.typekit.net/jsq0suq.css">
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<script>
+	document.documentElement.className = "js";
+	var supportsCssVars = function() { var e, t = document.createElement("style"); return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e };
+	supportsCssVars() || alert("Please view this in a modern browser that supports CSS Variables.");
+	</script>
+</head>
+
+<body class="loading">
+	<main>
+		<!-- begin scrollable -->
+		<div data-scroll>
+			<header class="header">
+				<h1 class="header__title">Interactive Mouse Effects with Three.js</h1>
+				<div class="info">
+					<a class="info__link" href="https://tympanus.net/codrops/?p=46712">Article</a>
+					<a class="info__link" href="https://tympanus.net/Tutorials/FoldingDOM/">Previous demo</a>
+					<a class="info__link" href="https://github.com/akella/UnrollingImages">GitHub</a>
+				</div>
+				<div class="info info_meta">
+					<a class="info__link info__link-important" href="#someurl">Part of a learning WebGL series</a>
+					<a class="info__link " href="/tutorials">more+</a>
+				</div>
+			</header>
+			<!-- begin section -->
+			<section class="section centered">
+				<img src="img/last.jpg" alt="" id="texture">
+			</section>
+			<!-- end section -->
+		</section>
+		<!-- end scrollable -->
+	</main>
+	<div id="container"></div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js"></script>
+	<script>
+
+		var camera, scene, renderer;
+		var geometry, material, mesh, texture;
+		var img = document.getElementById('texture');
+
+		init();
+		animate();
+
+		img.onload = function(){
+			document.body.classList.remove('loading')
+			img.style.opacity = 0;
+		    texture = new THREE.Texture( this );
+		    texture.needsUpdate = true;
+		    
+		    init()
+		    animate();
+		}
+
+		function init() {
+			console.log(texture);
+			camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
+			camera.position.z = 0.5;
+
+			scene = new THREE.Scene();
+
+			geometry = new THREE.PlaneGeometry( 0.45, 0.3);
+			material = new THREE.MeshBasicMaterial({
+				map: texture
+			});
+			mesh = new THREE.Mesh( geometry, material );
+			scene.add( mesh );
+
+			renderer = new THREE.WebGLRenderer( { antialias: true } );
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			
+		}
+
+		function animate() {
+
+			requestAnimationFrame( animate );
+
+			renderer.render( scene, camera );
+
+		}
+	</script>
+</body>
+
+</html>
