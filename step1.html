@@ -42,54 +42,8 @@
 		<!-- end scrollable -->
 	</main>
 	<div id="container"></div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js"></script>
-	<script>
+	<script src="js/step1.js"></script>
 
-		var camera, scene, renderer;
-		var geometry, material, mesh, texture;
-		var img = document.getElementById('texture');
-
-		init();
-		animate();
-
-		img.onload = function(){
-			document.body.classList.remove('loading')
-			img.style.opacity = 0;
-		    texture = new THREE.Texture( this );
-		    texture.needsUpdate = true;
-		    
-		    init()
-		    animate();
-		}
-
-		function init() {
-			console.log(texture);
-			camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
-			camera.position.z = 0.5;
-
-			scene = new THREE.Scene();
-
-			geometry = new THREE.PlaneGeometry( 0.45, 0.3);
-			material = new THREE.MeshBasicMaterial({
-				map: texture
-			});
-			mesh = new THREE.Mesh( geometry, material );
-			scene.add( mesh );
-
-			renderer = new THREE.WebGLRenderer( { antialias: true } );
-			renderer.setSize( window.innerWidth, window.innerHeight );
-			document.body.appendChild( renderer.domElement );
-			
-		}
-
-		function animate() {
-
-			requestAnimationFrame( animate );
-
-			renderer.render( scene, camera );
-
-		}
-	</script>
 </body>
 
 </html>
