@@ -25,7 +25,7 @@
 <!-- For contributors writing the article: -->
 <!-- ===================================== -->
 <hr><hr><hr><hr>
-<h1>First basic part</h1>
+<h1>Starting with a basic scene</h1>
 <p>I love WebGL, and in this article i will explain one of the cool effects you can make if you master shaders. This one is originally from Jesper Landberg official website, he is really cool dude, just go check out his stuff:</p>
 <video src="media/video.mp4" looped muted autoplay></video>
 <p>So let's get to business! Let's start with a simple HTML file:</p>
@@ -97,7 +97,7 @@ let mesh = new Mesh(
 <p>Here is the missing part of code:</p>
 <pre>glsl```
 	// set up post processing
-	let composer = new EffectComposer(this.renderer);
+	let composer = new EffectComposer(renderer);
     let renderPass = new RenderPass(scene, camera);
     // rendering our scene with an image
     composer.addPass(renderPass);
@@ -106,7 +106,7 @@ let mesh = new Mesh(
     let customPass = new ShaderPass({vertexShader,fragmentShader});
     // making sure we are rendering it.
     customPass.renderToScreen = true;
-    composer.addPass(this.customPass);
+    composer.addPass(customPass);
 
 	// actually render scene with our shader pass
 	composer.render()
@@ -126,15 +126,13 @@ let mesh = new Mesh(
 	// combine it all to final output
 	color = vec4(r, g, b, 1.);
 </pre>
-
-[example 1]
+[demo step1.html]
 
 <!-- ===================================== -->
 <hr><hr><hr><hr>
 <h1>Three images with effect</h1>
-<p>Many images, html-webgl connection</p>
 <p>Screen has its size, and so do images in 3D, what we need - calculate some relation if those two numbers.</p>
-<p>Lets imagine we can make a plane with a width 1, and fit it exactly to screen width. I actually did the same thing in <a href='https://tympanus.net/codrops/2019/11/05/creative-webgl-image-transitions/'>my previous article</a> I know you are not ready, but that is actually it. Because now  WidthOfPlane=ScreenSize. And in terms of Three.js scene, if want to make an image with an HTML 100px width, we should make a three.js object with width 100*(WidthOfPlane/ScreenSize). That's it! With this kind of math we can also set some margins and positions.</p>
+<p>Lets imagine we can make a plane with a width 1, and fit it exactly to screen width. I actually did the same thing in <a href='https://tympanus.net/codrops/2019/11/05/creative-webgl-image-transitions/'>my previous article</a>, well, but that is actually it. Because now  WidthOfPlane=ScreenSize. And in terms of Three.js scene, if want to make an image with an HTML 100px width, we should make a three.js object with width 100*(WidthOfPlane/ScreenSize). That's it! With this kind of math we can also set some margins and positions.</p>
 <p>So when the page loads, i will loop through all the images, get their dimensions, and add them to my 3D world:</p>
 <pre>```
 let images = [...document.querySelectorAll('.js-image')];
@@ -143,26 +141,29 @@ images.forEach(image=>{
 	let dimensions = image.getBoundingClientRect();
 	// hide original image
 	image.style.visibility = hidden;
-	// add 3D object to your scene
+	// add 3D object to your scene, according to its HTML brother dimensions
 	createMesh(dimensions);
 })
 ```</pre>
 <p>Now its quite straightforward to make this html-3d hybrid:</p>
-[example 2]
-<p>Another thing that i added here, mouseVelocity. I used it to change radius of the effect. The faster mouse moves, the bigger is radius.</p>
+[step 2]
+<p>Another thing that i added here, mouseVelocity. I used it to change radius of the effect. The faster the mouse moves, the bigger is the radius.</p>
+<p>Also to make it scrollable, we would just need to move the whole scene, the same distance that screen was scrolled. Using that same formula i mentioned at the start: NumberOfPixels*(WidthOfPlane/ScreenSize). Sometimes its even easier to make WidthOfPlane equal to ScreenSize. That way, you end up with exactly the same numbers in both worlds!</p>
 <!-- ===================================== -->
 <hr><hr><hr><hr>
 <h1>3 images with different effect</h1>
 
-<p>You can come up with any kind of effect with this approach. I decided i should play a little with parameters.</p>
+<p>Now, because its shader, you can come up with any kind of effect with this approach. I decided i should play a little with parameters.</p>
 <p>So instead of separating image to three color layers, we could just displace it depending on the distance to the mouse:</p>
 <pre>
 	vec2 newUV = mix(uv, mouse, circle); 
 	color = texture2D(tDiffuse,newUV);
 </pre>
+<p>And for the last effect i used randomization, to get a pixelated effect around mouse cursor.</p>
 <p>In this demo you can switch between effects to see some modifications you can make. With "zoom" effect, i just displace it, but in the last one, i also randomize pixels, which looks kinda cool to me, check this out.</p>
 [example 3]
 
+<p>I'd be happy to find out your ideas for this animation. What kind of effect you did with this technique?</p>
 <hr><hr><hr><hr>
 <!-- ===================================== -->
 <!-- ===================================== -->
