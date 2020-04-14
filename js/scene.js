@@ -93,7 +93,7 @@ export default class Sketch {
       zoom: ()=>{
         that.customPass.uniforms.uType.value = 1;
       },
-      aberration: ()=>{
+      random: ()=>{
         that.customPass.uniforms.uType.value = 2;
       },
     };
@@ -103,7 +103,7 @@ export default class Sketch {
     // this.gui.add(this.settings, "scale", 0, 1, 0.01);
     this.gui.add(this.settings, "colorful");
     this.gui.add(this.settings, "zoom");
-    this.gui.add(this.settings, "aberration");
+    this.gui.add(this.settings, "random");
   }
 
   setupResize() {
