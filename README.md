@@ -1,16 +1,16 @@
-# Image Unroll Effects with Three.js
+# Interactive Hover Effects with Three.js
 
-Some unrolling image effects using WebGL. By Yuriy Artyukh
+A simple tutorial on how to achieve an interactive mouseover/hover effect on images in some easy steps.
 
-![Image Title](https://tympanus.net/codrops/wp-content/uploads/2020/01/Unrolling_featured-1.jpg)
+![Image Title](https://tympanus.net/codrops/wp-content/uploads/2020/04/mousefeatured.jpg)
 
-[Article on Codrops](https://tympanus.net/codrops/?p=46712)
+[Article on Codrops](https://tympanus.net/codrops/?p=49069)
 
-[Demo](https://tympanus.net/Development/UnrollingImages/)
+[Demo](https://tympanus.net/Tutorials/webgl-mouseover-effects/step3.html)
 
 ## Instructions
 
-Run `parcel index.html` if you have [Parcel](https://parceljs.org/) installed, otherwise `npx parcel index.html`
+Run `parcel step1.html` if you have [Parcel](https://parceljs.org/) installed, otherwise `npx parcel step1.html`
 
 ## Credits
 

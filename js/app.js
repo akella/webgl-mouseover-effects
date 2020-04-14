@@ -274,12 +274,12 @@ class SmoothScroll {
 /********** Preload stuff **********/
 
 const fontParalucent = new Promise(resolve => {
-  new FontFaceObserver("paralucent").load().then(() => {
+  new FontFaceObserver("laca-text").load().then(() => {
     resolve();
   });
 });
 const fontStarling = new Promise(resolve => {
-  new FontFaceObserver("starling").load().then(() => {
+  new FontFaceObserver("operetta-12").load().then(() => {
     resolve();
   });
 });
