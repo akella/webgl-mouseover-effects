@@ -8,18 +8,17 @@ import EffectComposer, {
     var geometry, material, mesh, texture,uMouse = new THREE.Vector2(0,0);
     var img = document.getElementById('texture');
 
-    init();
-    animate();
-
-    img.onload = function(){
+    let dummyimg = document.createElement("img");
+    dummyimg.onload = function(){
       document.body.classList.remove('loading')
       img.style.opacity = 0;
-        texture = new THREE.Texture( this );
-        texture.needsUpdate = true;
-        
-        init()
-        animate();
+      texture = new THREE.Texture( this );
+      texture.needsUpdate = true;
+      
+      init()
+      animate();
     }
+    dummyimg.src = img.src;
 
     function init() {
       console.log(texture);
