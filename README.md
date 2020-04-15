@@ -10,7 +10,22 @@ A simple tutorial on how to achieve an interactive mouseover/hover effect on ima
 
 ## Instructions
 
-Run `parcel step1.html` if you have [Parcel](https://parceljs.org/) installed, otherwise `npx parcel step1.html`
+Install dependences:
+
+```shell
+npm install
+# or
+yarn add
+```
+
+HMR development:
+```shell
+npm run start1 # step1 hot module reload
+# or
+npm run start2 # step2 hot module reload
+# or
+npm run start3 # step3 hot module reload
+```
 
 ## Credits
 

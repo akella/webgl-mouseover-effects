@@ -1,7 +1,6 @@
 import FontFaceObserver from "fontfaceobserver";
-import imagesLoaded from "./imagesLoaded";
+import imagesLoaded from "imagesLoaded";
 import Scene from "./scene";
-import gsap from "gsap";
 
 const scene = new Scene("container");
 
@@ -273,16 +272,8 @@ class SmoothScroll {
 /***********************************/
 /********** Preload stuff **********/
 
-const fontParalucent = new Promise(resolve => {
-  new FontFaceObserver("laca-text").load().then(() => {
-    resolve();
-  });
-});
-const fontStarling = new Promise(resolve => {
-  new FontFaceObserver("operetta-12").load().then(() => {
-    resolve();
-  });
-});
+const fontParalucent = new FontFaceObserver("laca-text").load()
+const fontStarling = new FontFaceObserver("operetta-12").load()
 
 // Preload images
 const preloadImages = new Promise((resolve, reject) => {

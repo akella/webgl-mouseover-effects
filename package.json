@@ -4,7 +4,7 @@
     "dat.gui": "^0.7.6",
     "ev-emitter": "^1.1.1",
     "fontfaceobserver": "^2.1.0",
-    "gsap": "^3.2.1",
+    "imagesloaded": "^4.1.4",
     "simple-input-events": "^1.0.1",
     "three": ">=0.102.0",
     "three-orbit-controls": "^82.1.0"
@@ -12,6 +12,13 @@
   "devDependencies": {
     "cssnano": "^4.1.10",
     "glslify-bundle": "^5.1.1",
-    "glslify-deps": "^1.3.1"
+    "glslify-deps": "^1.3.1",
+    "parcel": "^1.12.4"
+  },
+  "scripts": {
+    "parcel": "parcel",
+    "start1": "npm run parcel -- step1.html",
+    "start2": "npm run parcel -- step2.html",
+    "start3": "npm run parcel -- step3.html"
   }
 }
