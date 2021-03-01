@@ -6,7 +6,7 @@
     "fontfaceobserver": "^2.1.0",
     "imagesloaded": "^4.1.4",
     "simple-input-events": "^1.0.1",
-    "three": ">=0.102.0",
+    "three": ">=0.125.0",
     "three-orbit-controls": "^82.1.0"
   },
   "devDependencies": {
