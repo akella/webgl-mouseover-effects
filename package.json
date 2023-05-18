@@ -19,6 +19,7 @@
     "parcel": "parcel",
     "start1": "npm run parcel -- step1.html",
     "start2": "npm run parcel -- step2.html",
-    "start3": "npm run parcel -- step3.html"
+    "start3": "npm run parcel -- step3.html",
+    "own": "npm run parcel -- own.html"
   }
 }

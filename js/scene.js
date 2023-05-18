@@ -2,25 +2,25 @@ import * as THREE from "three";
 import fragment from "./shader/fragment.glsl";
 import vertex from "./shader/vertex.glsl";
 
-import postvertex from './post/vertex.glsl';
-import postfragment from './post/fragment.glsl';
+import postvertex from "./post/vertex.glsl";
+import postfragment from "./post/fragment.glsl";
 import * as dat from "dat.gui";
-const createInputEvents = require('simple-input-events');
+const createInputEvents = require("simple-input-events");
 const event = createInputEvents(window);
 let OrbitControls = require("three-orbit-controls")(THREE);
 import EffectComposer, {
-    Pass,
-    RenderPass,
-    ShaderPass,
-    TexturePass,
-    ClearPass,
-    MaskPass,
-    ClearMaskPass,
-    CopyShader,
-} from '@johh/three-effectcomposer';
+  Pass,
+  RenderPass,
+  ShaderPass,
+  TexturePass,
+  ClearPass,
+  MaskPass,
+  ClearMaskPass,
+  CopyShader,
+} from "@johh/three-effectcomposer";
 
 const clamp = (min, max) => (value) =>
-    value < min ? min : value > max ? max : value;
+  value < min ? min : value > max ? max : value;
 
 export default class Sketch {
   constructor(selector) {
@@ -28,7 +28,7 @@ export default class Sketch {
 
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
-      alpha: true
+      alpha: true,
     });
     this.width = window.innerWidth;
     this.height = window.innerHeight;
@@ -72,12 +72,12 @@ export default class Sketch {
     this.render();
   }
 
-  mouseMove(){
+  mouseMove() {
     let that = this;
-    event.on('move', ({ position, event, inside, dragging }) => {
+    event.on("move", ({ position, event, inside, dragging }) => {
       // mousemove / touchmove
-      this.mouse.x = ( position[0] / window.innerWidth ) ;
-      this.mouse.y = 1. - ( position[1]/ window.innerHeight );
+      this.mouse.x = position[0] / window.innerWidth;
+      this.mouse.y = 1 - position[1] / window.innerHeight;
     });
   }
 
@@ -86,14 +86,14 @@ export default class Sketch {
     this.settings = {
       velo: 0,
       scale: 0,
-      colorful: ()=>{
+      colorful: () => {
         // that.makeColorful()
         that.customPass.uniforms.uType.value = 0;
       },
-      zoom: ()=>{
+      zoom: () => {
         that.customPass.uniforms.uType.value = 1;
       },
-      random: ()=>{
+      random: () => {
         that.customPass.uniforms.uType.value = 2;
       },
     };
@@ -121,9 +121,7 @@ export default class Sketch {
       Math.atan(this.width / this.camera.aspect / (2 * this.cameraDistance)) *
       (180 / Math.PI); // in degrees
 
-      this.customPass.uniforms.resolution.value.y = this.height / this.width;
-
-      
+    this.customPass.uniforms.resolution.value.y = this.height / this.width;
 
     this.camera.updateProjectionMatrix();
   }
@@ -133,7 +131,7 @@ export default class Sketch {
     this.geometry = new THREE.PlaneBufferGeometry(1, 1, 80, 80);
     this.material = new THREE.ShaderMaterial({
       extensions: {
-        derivatives: "#extension GL_OES_standard_derivatives : enable"
+        derivatives: "#extension GL_OES_standard_derivatives : enable",
       },
       side: THREE.DoubleSide,
       uniforms: {
@@ -144,13 +142,13 @@ export default class Sketch {
         texture2: { type: "t", value: null },
         resolution: { type: "v4", value: new THREE.Vector4() },
         uvRate1: {
-          value: new THREE.Vector2(1, 1)
-        }
+          value: new THREE.Vector2(1, 1),
+        },
       },
       // wireframe: true,
       transparent: true,
       vertexShader: vertex,
-      fragmentShader: fragment
+      fragmentShader: fragment,
     });
   }
 
@@ -187,7 +185,7 @@ export default class Sketch {
     return mesh;
   }
 
-  composerPass(){
+  composerPass() {
     this.composer = new EffectComposer(this.renderer);
     this.renderPass = new RenderPass(this.scene, this.camera);
     this.composer.addPass(this.renderPass);
@@ -196,18 +194,20 @@ export default class Sketch {
     var counter = 0.0;
     var myEffect = {
       uniforms: {
-        "tDiffuse": { value: null },
-        "distort": { value: 0 },
-        "resolution": { value: new THREE.Vector2(1.,window.innerHeight/window.innerWidth) },
-        "uMouse": { value: new THREE.Vector2(-10,-10) },
-        "uVelo": { value: 0 },
-        "uScale": { value: 0 },
-        "uType": { value: 0 },
-        "time": { value: 0 }
+        tDiffuse: { value: null },
+        distort: { value: 0 },
+        resolution: {
+          value: new THREE.Vector2(1, window.innerHeight / window.innerWidth),
+        },
+        uMouse: { value: new THREE.Vector2(-10, -10) },
+        uVelo: { value: 0 },
+        uScale: { value: 0 },
+        uType: { value: 0 },
+        time: { value: 0 },
       },
       vertexShader: postvertex,
-      fragmentShader: postfragment
-    }
+      fragmentShader: postfragment,
+    };
 
     this.customPass = new ShaderPass(myEffect);
     this.customPass.renderToScreen = true;
@@ -223,22 +223,24 @@ export default class Sketch {
     this.render();
   }
 
-  getSpeed(){
-    this.speed = Math.sqrt( (this.prevMouse.x- this.mouse.x)**2 + (this.prevMouse.y- this.mouse.y)**2 );
+  getSpeed() {
+    this.speed = Math.sqrt(
+      (this.prevMouse.x - this.mouse.x) ** 2 +
+        (this.prevMouse.y - this.mouse.y) ** 2
+    );
 
-    this.targetSpeed -= 0.1*(this.targetSpeed - this.speed);
-    this.followMouse.x -= 0.1*(this.followMouse.x - this.mouse.x);
-    this.followMouse.y -= 0.1*(this.followMouse.y - this.mouse.y);
-
+    this.targetSpeed -= 0.1 * (this.targetSpeed - this.speed);
+    this.followMouse.x -= 0.1 * (this.followMouse.x - this.mouse.x);
+    this.followMouse.y -= 0.1 * (this.followMouse.y - this.mouse.y);
 
     this.prevMouse.x = this.mouse.x;
     this.prevMouse.y = this.mouse.y;
   }
 
   render() {
-    this.time+=0.05;
+    this.time += 0.05;
     this.getSpeed();
-    this.scene.children.forEach(m => {
+    this.scene.children.forEach((m) => {
       if (m.material.uniforms) {
         m.material.uniforms.angle.value = this.settings.angle;
         m.material.uniforms.time.value = this.time;
@@ -248,8 +250,8 @@ export default class Sketch {
     this.customPass.uniforms.uMouse.value = this.followMouse;
     // this.customPass.uniforms.uVelo.value = this.settings.velo;
     this.customPass.uniforms.uVelo.value = Math.min(this.targetSpeed, 0.05);
-    this.targetSpeed *=0.999;
+    this.targetSpeed *= 0.999;
     // this.renderer.render(this.scene, this.camera);
-    if(this.composer) this.composer.render()
+    if (this.composer) this.composer.render();
   }
 }

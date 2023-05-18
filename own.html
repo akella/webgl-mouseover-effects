@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Interactive Hover Effects with Three.js | Demo 3</title>
+	<meta name="description" content="Interactive Hover Effects with Three.js" />
+	<meta name="keywords" content="three.js, webgl, hover, image, effect, website, web development" />
+	<meta name="author" content="Codrops" />
+	<link rel="stylesheet" href="https://use.typekit.net/yae0eed.css">
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<script>
+	document.documentElement.className = "js";
+	var supportsCssVars = function() { var e, t = document.createElement("style"); return t.innerHTML = "root: { --tmp-var: bold; }", document.head.appendChild(t), e = !!(window.CSS && window.CSS.supports && window.CSS.supports("font-weight", "var(--tmp-var)")), t.parentNode.removeChild(t), e };
+	supportsCssVars() || alert("Please view this in a modern browser that supports CSS Variables.");
+	</script>
+</head>
+
+<body class="loading">
+	<main>
+		<!-- begin scrollable -->
+		<div data-scroll>
+			<!-- begin section -->
+			<section class="section spaced">
+				<!-- begin item -->
+				<div class="item">
+					<div class="item__image">
+						<img src="img/FlowState-01.jpg" class="js-image" alt="Some image">
+						<!-- <video width="100%" height="100%" controls class="js-video">
+							<source src="img/FlagType-01.mp4" type="video/mp4">
+						  Your browser does not support the video tag.
+						  </video> -->
+					</div>
+				</div>
+				<!-- end item -->
+				
+			</section>
+			<!-- end section -->
+		</section>
+		<!-- end scrollable -->
+	</main>
+	<div id="container"></div>
+	<script src="js/app.js"></script>
+</body>
+
+</html>
